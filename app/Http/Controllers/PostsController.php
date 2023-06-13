@@ -17,15 +17,15 @@ class PostsController extends Controller
 
             $username = Auth::user()->username;
 
-            $follows = DB::table('follows')
+            $follow_count = DB::table('follows')
             ->where('follower', '=', Auth::id())
             ->count();
 
-            $followers = DB::table('follows')
+            $follower_count = DB::table('follows')
             ->where('follow', '=', Auth::id())
             ->count();
 
-        return view('posts.index',['posts' => $posts ,'username' => $username ,'follows' => $follows, 'followers' => $followers]);
+        return view('posts.index',['posts' => $posts ,'username' => $username ,'follows' => $follow_count, 'followers' => $follower_count]);
     }
 
      public function create(Request $request){

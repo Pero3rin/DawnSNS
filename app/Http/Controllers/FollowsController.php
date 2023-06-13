@@ -29,7 +29,7 @@ class FollowsController extends Controller
             $follower_count = DB::table('follows')
             ->where('follow', '=', Auth::id())
             ->count();
-// r
+
             $username = Auth::user()->username;
 
         return view('follows.followList',['follows'=>$follows,'follow_post'=>$follow_post, 'follower_count' => $follower_count, 'follow_count' => $follow_count ,'username' => $username]);
