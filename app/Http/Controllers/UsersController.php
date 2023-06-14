@@ -13,6 +13,7 @@ class UsersController extends Controller
         $users = DB::table('users')
         ->where('id',Auth::id())
         ->first();
+
         $session_count = session()->get('circle');
 
         $username = Auth::user()->username;
@@ -26,7 +27,7 @@ class UsersController extends Controller
             ->count();
 
 
-        return view('users.profile',['users'=>$users,'session_count' => $session_count,'username' => $username ,'follows' => $follow_count , 'followers' => $follower_count]);
+        return view('users.profile',['users'=>$users,'session_count' => $session_count,'username' => $username ,'follow' => $follow_count , 'follower' => $follower_count]);
     }
 
     public function search(Request $request){
@@ -41,14 +42,15 @@ class UsersController extends Controller
         ->where('id','<>',Auth::id())
         ->get();
         }
+
         $followNumbers = DB::table('follows')
             ->where('follower',Auth::id())
             ->where('id','<>',Auth::id())
             ->pluck('follow');
 
-                    $username = Auth::user()->username;
+            $username = Auth::user()->username;
 
-             $follow_count = DB::table('follows')
+            $follow_count = DB::table('follows')
             ->where('follower', '=', Auth::id())
             ->count();
 
@@ -57,7 +59,7 @@ class UsersController extends Controller
             ->count();
 
 
-        return view('users.search',['users'=>$users,'followNumbers'=>$followNumbers,'username' => $username ,'follows' => $follow_count , 'followers' => $follower_count]);
+        return view('users.search',['users'=>$users,'followNumbers'=>$followNumbers,'username' => $username ,'follow' => $follow_count, 'follower' => $follower_count]);
     }
 
     public function update(Request $request){

@@ -32,7 +32,7 @@ class FollowsController extends Controller
 
             $username = Auth::user()->username;
 
-        return view('follows.followList',['follows'=>$follows,'follow_post'=>$follow_post, 'follower_count' => $follower_count, 'follow_count' => $follow_count ,'username' => $username]);
+        return view('follows.followList',['follows'=>$follows,'follow_post'=>$follow_post, 'follower' => $follower_count, 'follow' => $follow_count ,'username' => $username]);
     }
 
     public function followerList(){
@@ -61,7 +61,7 @@ class FollowsController extends Controller
 
             $username = Auth::user()->username;
 
-        return view('follows.followerList',['followers'=>$followers, 'followers' => $followers , 'follower_count' => $follower_count, 'follow_count' => $follow_count ,'username' => $username]);
+        return view('follows.followerList',['followers'=>$followers, 'followers' => $followers , 'follower' => $follower_count, 'follow' => $follow_count ,'username' => $username]);
     }
     public function create(Request $request){
         $id = $request->id;

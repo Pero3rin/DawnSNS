@@ -25,7 +25,7 @@ class PostsController extends Controller
             ->where('follow', '=', Auth::id())
             ->count();
 
-        return view('posts.index',['posts' => $posts ,'username' => $username ,'follows' => $follow_count, 'followers' => $follower_count]);
+        return view('posts.index',['posts' => $posts ,'username' => $username ,'follow' => $follow_count, 'follower' => $follower_count]);
     }
 
      public function create(Request $request){
