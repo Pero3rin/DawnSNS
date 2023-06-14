@@ -15,10 +15,11 @@ class FollowsController extends Controller
             ->where('follows.follower', Auth::id())
             ->select('users.id','users.images')
             ->get();
-        $follow_post = DB::table('users')
-            ->join('follows','users.id', '=', 'follows.follow')
+
+        $follow_posts = DB::table('users')
+            ->join('follows','users.id', '=', 'follows.follower')
             ->join('posts', 'posts.user_id', '=', 'follows.follow')
-            ->where('follows.follower', Auth::id())
+            ->where('follows.follow', Auth::id())
             ->select('users.username','users.images','posts.posts', 'posts.created_at')
             ->get();
 
@@ -32,7 +33,8 @@ class FollowsController extends Controller
 
             $username = Auth::user()->username;
 
-        return view('follows.followList',['follows'=>$follows,'follow_post'=>$follow_post, 'follower' => $follower_count, 'follow' => $follow_count ,'username' => $username]);
+        return view('follows.followList',['follows'=>$follows,'follow_posts'=>$follow_posts, 'follower_count' => $follower_count,
+         'follow_count' => $follow_count ,'username' => $username]);
     }
 
     public function followerList(){
@@ -42,14 +44,16 @@ class FollowsController extends Controller
             ->select('users.id','users.images')
             ->get();
 
+        $follower_posts = DB::table('users')
+            ->join('follows','users.id', '=', 'follows.follow')
+            ->join('posts', 'posts.user_id', '=', 'follows.follower')
+            ->where('follows.follow', Auth::id())
+            ->select('users.username','users.images','posts.posts', 'posts.created_at')
+            ->get();
+
             $follows = DB::table('follows')
             ->where('follower', '=', Auth::id())
             ->count();
-
-            $followers = DB::table('follows')
-            ->where('follow', '=', Auth::id())
-            ->count();
-
 
             $follow_count = DB::table('follows')
             ->where('follower', '=', Auth::id())
@@ -61,7 +65,8 @@ class FollowsController extends Controller
 
             $username = Auth::user()->username;
 
-        return view('follows.followerList',['followers'=>$followers, 'followers' => $followers , 'follower' => $follower_count, 'follow' => $follow_count ,'username' => $username]);
+        return view('follows.followerList',['followers'=>$followers,'follower_posts'=>$follower_posts ,'followers' => $followers , 'follower_count' => $follower_count,
+         'follow_count' => $follow_count ,'username' => $username]);
     }
     public function create(Request $request){
         $id = $request->id;

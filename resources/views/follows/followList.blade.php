@@ -11,7 +11,7 @@
 
 <table class='table table-hover'>
     <tr>
-    @foreach ($follow_post as $follow_post)
+    @foreach ($follow_posts as $follow_post)
         <td>
           <img src="/images/{{ $follow_post->images }}" alt="">
         </td>

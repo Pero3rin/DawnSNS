@@ -55,17 +55,7 @@ class LoginController extends Controller
             }
         }
 
-            $username = Auth::user()->username;
-
-            $follow_count = DB::table('follows')
-            ->where('follower', '=', Auth::id())
-            ->count();
-
-            $follower_count = DB::table('follows')
-            ->where('follow', '=', Auth::id())
-            ->count();
-
-        return view("auth.login",['username' => $username ,'follow' => $follow_count, 'follower' => $follower_count]);
+        return view("auth.login",);
     }
 
     public function logout(){

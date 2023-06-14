@@ -27,7 +27,7 @@ class UsersController extends Controller
             ->count();
 
 
-        return view('users.profile',['users'=>$users,'session_count' => $session_count,'username' => $username ,'follow' => $follow_count , 'follower' => $follower_count]);
+        return view('users.profile',['users'=>$users,'session_count' => $session_count,'username' => $username ,'follow_count' => $follow_count , 'follower_count' => $follower_count]);
     }
 
     public function search(Request $request){
@@ -59,7 +59,7 @@ class UsersController extends Controller
             ->count();
 
 
-        return view('users.search',['users'=>$users,'followNumbers'=>$followNumbers,'username' => $username ,'follow' => $follow_count, 'follower' => $follower_count]);
+        return view('users.search',['users'=>$users,'followNumbers'=>$followNumbers,'username' => $username ,'follow_count' => $follow_count, 'follower_count' => $follower_count]);
     }
 
     public function update(Request $request){
