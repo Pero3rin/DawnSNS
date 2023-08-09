@@ -19,6 +19,10 @@ header {
     flex: 0 0 80%;
 }
 
+.header_menu {
+    justify-content: space space-around;
+}
+
 #side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #6C6C6C;
@@ -29,5 +33,80 @@ nav {
 }
 
 .icon-img {
-    width: 50px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.main_logo {
+    height: 100px;
+    width: 200px;
+}
+
+#toggle-button {
+    cursor: pointer;
+}
+
+#menu-bar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    text-align: center;
+    margin: 0 10px;
+}
+
+
+
+#toggle-button,
+.icon-img {
+    vertical-align: middle;
+}
+
+.g-navi {
+    display: flex;
+}
+
+.follow_delete_button input[type="submit"] {
+    background-color: red;
+    /* ボタンの背景色を赤色に設定 */
+    color: white;
+    /* ボタンのテキスト色を白色に設定 */
+    border: none;
+    /* ボタンの枠線を削除 */
+    padding: 5px 10px;
+    /* ボタンの余白を調整 */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+    border-radius: 10px;
+    /* 四角を丸くするための値を指定 */
+    margin-left: 100px;
+}
+
+.follow_button input[type="submit"] {
+    background-color: blue;
+    /* ボタンの背景色を青色に設定 */
+    color: white;
+    /* ボタンのテキスト色を白色に設定 */
+    border: none;
+    /* ボタンの枠線を削除 */
+    padding: 5px 10px;
+    /* ボタンの余白を調整 */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+    border-radius: 10px;
+    /* 四角を丸くするための値を指定 */
+    margin-left: 100px;
+}
+
+.rolling-button {
+    transition: .3s ease-in-out;
+}
+
+.rolling-button.clicked {
+    transform: rotate(180deg);
+    transition: .3s ease-in-out;
+}
+
+.modal-main {
+    display: none;
 }

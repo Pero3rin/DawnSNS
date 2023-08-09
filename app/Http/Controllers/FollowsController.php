@@ -16,10 +16,13 @@ class FollowsController extends Controller
             ->select('users.id','users.images')
             ->get();
 
+        $follow_ids = DB::table('follows')
+        ->where('follower',Auth::id())
+        ->pluck('follow');
+
         $follow_posts = DB::table('users')
-            ->join('follows','users.id', '=', 'follows.follower')
-            ->join('posts', 'posts.user_id', '=', 'follows.follow')
-            ->where('follows.follow', Auth::id())
+            ->join('posts', 'posts.user_id', '=', 'users.id')
+            ->whereIn('posts.user_id', $follow_ids)
             ->select('users.username','users.images','posts.posts', 'posts.created_at')
             ->get();
 
@@ -44,10 +47,13 @@ class FollowsController extends Controller
             ->select('users.id','users.images')
             ->get();
 
+        $follower_ids = DB::table('follows')
+        ->where('follow',Auth::id())
+        ->pluck('follower');
+
         $follower_posts = DB::table('users')
-            ->join('follows','users.id', '=', 'follows.follow')
-            ->join('posts', 'posts.user_id', '=', 'follows.follower')
-            ->where('follows.follow', Auth::id())
+            ->join('posts', 'posts.user_id', '=', 'users.id')
+            ->whereIn('posts.user_id', $follower_ids)
             ->select('users.username','users.images','posts.posts', 'posts.created_at')
             ->get();
 
@@ -65,8 +71,13 @@ class FollowsController extends Controller
 
             $username = Auth::user()->username;
 
-        return view('follows.followerList',['followers'=>$followers,'follower_posts'=>$follower_posts ,'followers' => $followers , 'follower_count' => $follower_count,
-         'follow_count' => $follow_count ,'username' => $username]);
+        return view('follows.followerList',[
+            'followers'=>$followers,'follower_posts'=>$follower_posts ,
+            'follows' => $follows ,
+            'follower_count' => $follower_count,
+            'follow_count' => $follow_count ,
+            'username' => $username]);
+
     }
     public function create(Request $request){
         $id = $request->id;
@@ -88,4 +99,8 @@ class FollowsController extends Controller
         ])->delete();
         return back();
     }
-}
+
+
+
+
+    }

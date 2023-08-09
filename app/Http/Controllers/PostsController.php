@@ -13,6 +13,7 @@ class PostsController extends Controller
             $posts = DB::table('posts')
             ->join('users','posts.user_id','users.id')
             ->select('posts.*','users.username','users.images')
+            ->orderBy('posts.created_at', 'desc')
             ->get();
 
             $username = Auth::user()->username;
@@ -34,7 +35,8 @@ class PostsController extends Controller
         $id = Auth::id();
         DB::table('posts')->insert([
             'posts' => $post,
-            'user_id' => $id
+            'user_id' => $id,
+            'created_at' => now(),
         ]);
         return redirect('/top');
     }

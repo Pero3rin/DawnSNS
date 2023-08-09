@@ -1,27 +1,49 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>機能を実装していきましょう。</h2>
 {!! Form::open(['url' => 'post/create']) !!}
-    {!! Form::input('text', 'newPost', null,['required', 'class' => 'form-control', 'placeholder' => '投稿内容']) !!}
-    <button type="submit" class="btn btn-success pull-right">追加</button>
+    {!! Form::input('text', 'newPost', null,['required', 'class' => 'form-control', 'placeholder' => '何をつぶやこうか？']) !!}
+    <button type="submit" class="btn btn-success pull-right">
+        <img src="/storage/images/post.png">
+    </button>
 {!! Form::close() !!}
 
 <br>
 <br>
-    @foreach ($posts as $post)
-        {{ $post->id }}
-        {{ $post->posts }}
-        {{ $post->created_at }}
+@foreach ($posts as $post)
+    <img src="storage/images/{{ $post->images }}" alt="" class="icon-img">
+    {{ $post->username }}
+    {{ $post->posts }}
+    {{ $post->created_at }}
 
-        {!! Form::open(['url' => 'post/update']) !!}
-    {!! Form::input('text', 'upPost', $post->posts, ['required', 'class' => 'form-control']) !!}
-    {!! Form::hidden( 'id', $post->id,) !!}
-    <button type="submit" class="btn btn-success pull-right">編集</button>
-{!! Form::close() !!}
+    @if ($post->user_id === Auth::user()->id)
 
-            <a class="btn btn-danger" href="/post/{{ $post->id }}/delete">削除</a>
+
+    <button type="submit" class="btn btn-success pull-right" >
+        <img src="/storage/images/edit.png">
+    </button>
+        <a class="btn btn-danger" href="/post/{{ $post->id }}/delete">
+                <img src="/storage/images/trash.png"
+                onmouseover="this.src='/storage/images/trash_h.png'"
+                onmouseout="this.src='/storage/images/trash.png'">
+        </a>
+
+<div class="modal-main">
+    <div class="modal-inner">
+            {!! Form::open(['url' => 'post/update']) !!}
+            {!! Form::input('text', 'upPost', $post->posts,['required',   'class' => 'form-control']) !!}
+            {!! Form::hidden( 'id', $post->id,) !!}
+            {!! Form::close() !!}
+
+            <button type="submit" class="btn btn-success pull-right" >
+            <img src="/storage/images/edit.png">
+        </button>
+    </div>
+</div>
+
+
+    @endif
 <br>
-    @endforeach
+@endforeach
 
 @endsection

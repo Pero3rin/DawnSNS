@@ -3,8 +3,9 @@
 @section('content')
 <div>
   @foreach($follows as $follow)
-  <a href="">
-    <img src="/images/{{ $follow->images }}" alt="">
+  <a href="/otherProfile/{{ $follow->id }}">
+    <img src="storage/images/{{ $follow->images }}" alt=""
+    class="icon-img">
   </a>
   @endforeach
 </div>
@@ -13,7 +14,10 @@
     <tr>
     @foreach ($follow_posts as $follow_post)
         <td>
-          <img src="/images/{{ $follow_post->images }}" alt="">
+          <a href='/otherProfile/{{$follow->id}}'>
+          <img src="storage/images/{{ $follow_post->images }}" alt=""
+          class="icon-img">
+</a>
         </td>
         <td>{{ $follow_post->username }}</td>
         <td>{{ $follow_post->posts }}</td>

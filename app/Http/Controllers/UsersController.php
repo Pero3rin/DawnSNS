@@ -31,8 +31,8 @@ class UsersController extends Controller
     }
 
     public function search(Request $request){
+        $keyword = $request->search;
         if(request('search')){
-            $keyword = $request->search;
             $users = DB::table('users')
             ->where('username','like',"%".$keyword."%")
             ->where('id','<>',Auth::id())
@@ -59,7 +59,7 @@ class UsersController extends Controller
             ->count();
 
 
-        return view('users.search',['users'=>$users,'followNumbers'=>$followNumbers,'username' => $username ,'follow_count' => $follow_count, 'follower_count' => $follower_count]);
+        return view('users.search',['users'=>$users,'followNumbers'=>$followNumbers,'username' => $username ,'follow_count' => $follow_count, 'follower_count' => $follower_count, 'keyword' => $keyword, ]);
     }
 
     public function update(Request $request){
@@ -103,4 +103,36 @@ class UsersController extends Controller
 
     }
 
+    public function otherProfile($id){
+        $user = DB::table('users')
+        ->where('id',$id)
+        ->first();
+
+        $username = Auth::user()->username;
+
+        $posts = DB::table('posts')
+            ->join('users','posts.user_id','users.id')
+            ->where('posts.user_id',$id)
+            ->select('posts.*','users.username','users.images')
+            ->get();
+
+            $username = Auth::user()->username;
+
+            $follow_count = DB::table('follows')
+            ->where('follower', '=', Auth::id())
+            ->count();
+
+            $follower_count = DB::table('follows')
+            ->where('follow', '=', Auth::id())
+            ->count();
+
+        $followNumbers = DB::table('follows')
+            ->where('follower',Auth::id())
+            ->where('id','<>',Auth::id())
+            ->pluck('follow');
+
+
+        return view('users.otherProfile',['user' => $user,
+        'username' => $username,'posts' => $posts,'username' => $username, 'follow_count' => $follow_count,'follower_count'=> $follower_count,'followNumbers'=>$followNumbers]);
+    }
 }

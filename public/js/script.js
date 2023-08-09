@@ -15,7 +15,7 @@ $(function () {
   });
 
   $('#toggle-button').click(function () {
-    console.log('test');
     $('nav').slideToggle();
+    $('.rolling-button').toggleClass('clicked');
   });
 });

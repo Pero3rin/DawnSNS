@@ -2,6 +2,11 @@
 
 @section('content')
 
+<div>
+<img src="/storage/images/{{ Auth::user()->images }}"
+      class="icon-img">
+</div>
+
 {{ $users->username }}
 
 <h2></h2>

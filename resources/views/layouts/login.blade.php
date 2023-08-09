@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/reset.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -19,24 +19,40 @@
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="./js/script.js"></script>
+<script src="/js/script.js"></script>
 
 
 </head>
 <body>
     <header>
-          <h1><a><img src="images/main_logo.png"></a></h1>
-            <div id="toggle-button">
-                    <p><img src="storage/images/{{ Auth::user()->images }}" class="icon-img">〇〇さん<img src="images/arrow.png"></p>
-                </div>
+        <div class = "header_menu">
+            <div class = "main_logo">
+                <a href="/top">
+                <img src="/storage/images/main_logo.png">
+                </a>
+            </div>
+
+        <div id="menu-bar">
+            <div id="toggle-button" class="rolling-button">
+                V
+            </div>
+            <div>
+                {{Auth::user()->username}}さん
+                <img src="/storage/images/{{ Auth::user()->images }}"
+                class="icon-img">
+            </div>
+        </div>
+
                   <nav>
                     <ul class="g-navi">
                         <li><a href="/top">ホーム</a></li>
-                        <li><a href="/profile">プロフィール</a></li>
+                        <li><a href="/profile">プロフィール編集</a></li>
                         <li><a href="/logout">ログアウト</a></li>
                     </ul>
                   </nav>
+        </div>
     </header>
+
     <div id="row">
         <div id="container">
             @yield('content')

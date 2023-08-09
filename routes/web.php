@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/follow/create','FollowsController@create');
   Route::post('/follow/delete','FollowsController@delete');
 
+  Route::get('/otherProfile/{id}/','UsersController@otherProfile');
+
 
   Route::post('/post/create','PostsController@create');
   Route::post('/post/update','PostsController@update');
