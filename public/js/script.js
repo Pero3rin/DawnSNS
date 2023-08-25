@@ -19,3 +19,25 @@ $(function () {
     $('.rolling-button').toggleClass('clicked');
   });
 });
+
+$(function () {
+  $('.modalopen').each(function () {
+    $(this).on('click', function () {
+      var apple = $(this).data('target');
+      var modal = document.getElementById(apple);
+      console.log(apple);
+      $(modal).fadeIn();
+      return false;
+    });
+  });
+  $('.modal-inner').on('click', function (e) {
+    if (!$(e.target).closest('.inner-content').length) {
+      var apple = $('.modalopen').data('target');
+      var modal = document.getElementById(apple);
+      $(modal).fadeOut();
+    }
+    if (('.btn-success').on('click')) {
+      $('form').submit();
+    }
+  });
+});

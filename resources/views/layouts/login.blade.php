@@ -11,10 +11,6 @@
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
-    <link rel="icon" href="画像URL" sizes="16x16" type="image/png" />
-    <link rel="icon" href="画像URL" sizes="32x32" type="image/png" />
-    <link rel="icon" href="画像URL" sizes="48x48" type="image/png" />
-    <link rel="icon" href="画像URL" sizes="62x62" type="image/png" />
     <!--iphoneのアプリアイコン指定-->
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
@@ -42,14 +38,15 @@
                 class="icon-img">
             </div>
         </div>
-
-                  <nav>
-                    <ul class="g-navi">
-                        <li><a href="/top">ホーム</a></li>
-                        <li><a href="/profile">プロフィール編集</a></li>
-                        <li><a href="/logout">ログアウト</a></li>
-                    </ul>
-                  </nav>
+        <div class="nav-right">
+            <nav>
+                <ul>
+                    <li><a href="/top">ホーム</a></li>
+                    <li><a href="/profile">プロフィール編集</a></li>
+                    <li><a href="/logout">ログアウト</a></li>
+                </ul>
+            </nav>
+        </div>
         </div>
     </header>
 

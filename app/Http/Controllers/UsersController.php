@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\Validator;
+
 
 class UsersController extends Controller
 {
@@ -63,12 +65,41 @@ class UsersController extends Controller
     }
 
     public function update(Request $request){
+        $validator = Validator::make($request->all(), [
+            'UserName' => 'required|string|min:4|max:12',
+            'mail'  => 'required|string|email|min:4|max:50',
+            'NewPassWord' => 'min:4|max:12'
+        ],[
+            'UserName.required' => '名前は必須です',
+            'UserName.min' => '名前は4文字以上です',
+            'UserName.max' => '名前は12文字以下です',
+            'mail.required' => 'メールアドレスは必須です',
+            'mail.min' => 'メールアドレスは4文字以上です',
+            'mail.max' => 'メールアドレスは50文字以下です',
+            'mail.email' => '有効なメールアドレスを入力してください',
+            'NewPassWord.min' => 'パスワードは4文字以上です',
+            'NewPassWord.max' => 'パスワードは12文字以内です'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+
+
+        // バリデーションが通ったら
         $username = $request->input('UserName');
         $mail = $request->input('mail');
         $bio = $request->input('bio');
 
         if(request('NewPassword')){
             $newpassword = $request->input('NewPassword');
+            DB::table('users')
+            ->where('id',Auth::id())
+            ->update([
+                'password' => Hash::make($newpassword)
+        ]);
         }else{
             $newpassword = DB::table('users')
             ->where('id',Auth::id())
@@ -94,7 +125,6 @@ class UsersController extends Controller
         ->update([
             'username' => $username,
             'mail' => $mail,
-            'password' => Hash::make($newpassword),
             'bio' => $bio,
             'images' => $image_name,
         ]);

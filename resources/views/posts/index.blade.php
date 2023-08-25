@@ -18,28 +18,38 @@
 
     @if ($post->user_id === Auth::user()->id)
 
-
+<div class="modalopen" data-target="modal{{ $post->id }}">
     <button type="submit" class="btn btn-success pull-right" >
-        <img src="/storage/images/edit.png">
+        <img src="/storage/images/edit.png" >
     </button>
-        <a class="btn btn-danger" href="/post/{{ $post->id }}/delete">
+</div>
+
+        <td>
+            <a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm
+            ('こちらの投稿を削除してもよろしいでしょうか？')">
                 <img src="/storage/images/trash.png"
                 onmouseover="this.src='/storage/images/trash_h.png'"
                 onmouseout="this.src='/storage/images/trash.png'">
-        </a>
+            </a>
+        </td>
 
-<div class="modal-main">
+<div class="modal-main" id="modal{{ $post->id }}">
     <div class="modal-inner">
-            {!! Form::open(['url' => 'post/update']) !!}
-            {!! Form::input('text', 'upPost', $post->posts,['required',   'class' => 'form-control']) !!}
-            {!! Form::hidden( 'id', $post->id,) !!}
-            {!! Form::close() !!}
-
-            <button type="submit" class="btn btn-success pull-right" >
-            <img src="/storage/images/edit.png">
-        </button>
+        <div class="inner-content">
+            <div class="post-Form">
+                {!! Form::open(['url' => 'post/update']) !!}
+                    {!! Form::input('text', 'upPost', $post->posts,['required', 'class' => 'form-edit']) !!}
+                    {!! Form::hidden( 'id', $post->id,) !!}
+                    <button type="submit" class="btn btn-success pull-right" >
+                        <img src="/storage/images/edit.png" class="image-modal">
+                    </button>
+                {!! Form::close() !!}
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 
     @endif

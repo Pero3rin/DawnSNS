@@ -62,8 +62,9 @@ nav {
     vertical-align: middle;
 }
 
-.g-navi {
-    display: flex;
+.nav-right {
+    /* display: flex; */
+    text-align: right;
 }
 
 .follow_delete_button input[type="submit"] {
@@ -109,4 +110,51 @@ nav {
 
 .modal-main {
     display: none;
+}
+
+.modal-trash {
+    display: none;
+}
+
+.modal-inner {
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #666666;
+    color: #666666;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.inner-content {
+    text-align: center;
+    margin: 0;
+    padding: 15%;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-edit {
+    width: 400px;
+    height: 300px;
+
+}
+
+.image-modal {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.modalClose {
+    cursor: pointer;
+}
+
+.btn {
+    cursor: pointer;
 }

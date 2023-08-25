@@ -21,7 +21,9 @@
 </head>
 <body>
     <header>
-        <h1><img src="images/main_logo.png"></h1>
+        <div>
+            <img src="/storage/images/main_logo.png">
+        </div>
         <p>Social Network Service</p>
     </header>
     <div id="container">

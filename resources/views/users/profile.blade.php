@@ -15,8 +15,8 @@
 
 {{ Form::label('UserName') }}
 {{ Form::text('UserName',$users->username,['class' => 'input']) }}
-@if($errors->has('username'))
-<p>{{ $errors->first('username') }}</p>
+@if($errors->has('UserName'))
+<p>{{ $errors->first('UserName') }}</p>
 @endif
 
 <h2></h2>
@@ -35,9 +35,9 @@
 
 <h2></h2>
 {{ Form::label('NewPassWord') }}
-{{ Form::text('NewPassword',null,['class' => 'input']) }}
-@if($errors->has('password_'))
-<p>{{ $errors->first('newpassword') }}</p>
+{{ Form::text('NewPassWord',null,['class' => 'input']) }}
+@if($errors->has('NewPassWord'))
+<p>{{ $errors->first('NewPassWord') }}</p>
 @endif
 
 <h2></h2>
