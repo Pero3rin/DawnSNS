@@ -32,6 +32,8 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::group(['middleware' => 'auth'], function() {
   //ログイン中のページ
   Route::get('/top','PostsController@index');
+  Route::get('/test','PostsController@test');
+
 
   Route::get('/post/{id}/delete','PostsController@delete');
 
